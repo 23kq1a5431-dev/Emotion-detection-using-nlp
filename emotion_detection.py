@@ -1,10 +1,10 @@
+df = pd.read_csv('/content/tweet_emotions.csv.zip')
 stop_words = set(stopwords.words('english'))
 
 def preprocess(text):
     tokens = word_tokenize(text.lower())
     filtered = [w for w in tokens if w.isalpha() and w not in stop_words]
     return " ".join(filtered)
-df = pd.read_csv('/content/tweet_emotions.csv.zip')
 
 df['clean_text'] = df['content'].apply(preprocess)
 
@@ -85,3 +85,16 @@ plt.xticks(rotation=45)
 
 plt.tight_layout()
 plt.show()
+
+while True:
+    text = input("\nEnter a sentence : ")
+
+
+    if text.lower() == "exit":
+        print("See you Again")
+        break
+
+    predicted_emotion = predict_emotion(text)
+
+    print("Input:", text)
+    print("Predicted emotion:", predicted_emotion)
